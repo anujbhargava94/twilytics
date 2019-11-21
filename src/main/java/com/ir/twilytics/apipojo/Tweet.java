@@ -2,10 +2,14 @@
 package com.ir.twilytics.apipojo;
 
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Tweets {
+@Service
+public class Tweet {
 
     @SerializedName("poi_name")
     @Expose
