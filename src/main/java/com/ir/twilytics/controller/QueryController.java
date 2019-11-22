@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.ir.twilytics.apipojo.Doc;
-import com.ir.twilytics.apipojo.Tweet;
-import com.ir.twilytics.apipojo.TweetResponse;
 import com.ir.twilytics.service.QueryService;
 
 @Controller
