@@ -216,8 +216,20 @@ public class Doc {
 	    @SerializedName("lang")
 	    @Expose
 	    private List<String> lang = null;
+	    
+	    @SerializedName("user.location")
+	    @Expose
+	    private List<String> userLocation = null;
 
-	    public List<String> getPoiName() {
+	    public List<String> getUserLocation() {
+			return userLocation;
+		}
+
+		public void setUserLocation(List<String> userLocation) {
+			this.userLocation = userLocation;
+		}
+
+		public List<String> getPoiName() {
 	        return poiName;
 	    }
 
