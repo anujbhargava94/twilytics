@@ -47,7 +47,7 @@ public class QueryService {
     private RestTemplate restTemplate;
 
     public List<Doc> findAll(String query) {
-    	String url = resource + "q=full_text:("+query+")";
+    	String url = resource + "q=full_text:("+query+")&rows=100";
     	System.out.println("urls is : "+url);
     	List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
     	messageConverters.add(new FormHttpMessageConverter());
@@ -65,7 +65,7 @@ public class QueryService {
     }
     
     public List<Doc> findAllTweets(String query) {
-    	String url = resource + "q=full_text:("+query+")";
+    	String url = resource + "q=full_text:("+query+")&rows=100";
     	System.out.println("urls is : "+url);
     	List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
     	messageConverters.add(new FormHttpMessageConverter());
