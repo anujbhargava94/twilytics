@@ -1,10 +1,8 @@
 package com.ir.twilytics.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import com.ir.twilytics.apipojo.Doc;
 import com.ir.twilytics.apipojo.Tweet;
 import com.ir.twilytics.apipojo.TweetResponse;
+import com.ir.twilytics.dao.QueryBuilder;
 
 @Service
 public class QueryService {
@@ -43,11 +42,16 @@ public class QueryService {
     private String resource;
     @Value("${resource.tasks}/{id}")
     private String idResource;
+    
     @Autowired
     private RestTemplate restTemplate;
+    
+    @Autowired
+    private QueryBuilder queryBuilder;
+    
 
     public List<Doc> findAll(String query) {
-    	String url = resource + "q=full_text:("+query+")&rows=100";
+    	String url = resource + queryBuilder.addQueryText("full_text:("+query+")").addRows(100).getQuery().toString();
     	System.out.println("urls is : "+url);
     	List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
     	messageConverters.add(new FormHttpMessageConverter());
@@ -65,7 +69,7 @@ public class QueryService {
     }
     
     public List<Doc> findAllTweets(String query) {
-    	String url = resource + "q=full_text:("+query+")&rows=100";
+    	String url = resource + queryBuilder.addQueryText("full_text:("+query+")").addRows(100).getQuery().toString();
     	System.out.println("urls is : "+url);
     	List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
     	messageConverters.add(new FormHttpMessageConverter());

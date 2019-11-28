@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
+import com.ir.twilytics.dao.QueryBuilder;
+import com.ir.twilytics.daoImpl.SolrQueryBuilder;
+
 @SpringBootApplication
 @ComponentScan("com.ir.twilytics")
 public class TwilyticsApplication {
@@ -17,6 +20,12 @@ public class TwilyticsApplication {
 	@Bean
 	public RestTemplate restTemplate() {
 	    return new RestTemplate();
+	}
+	
+	@Bean
+	public QueryBuilder getQueryBuilder()
+	{
+		return new SolrQueryBuilder();
 	}
 
 }
