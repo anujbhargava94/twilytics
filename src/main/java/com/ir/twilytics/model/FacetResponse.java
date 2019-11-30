@@ -1,47 +1,46 @@
 
 package com.ir.twilytics.model;
 
+import java.io.Serializable;
 import java.util.List;
-
-import org.springframework.stereotype.Service;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Service
-public class Response {
+public class FacetResponse implements Serializable
+{
 
     @SerializedName("numFound")
     @Expose
-    private Integer numFound;
+    private Long numFound;
     @SerializedName("start")
     @Expose
-    private Integer start;
+    private Long start;
     @SerializedName("docs")
     @Expose
-    private List<Doc> docs = null;
+    private List<Object> docs = null;
+    private final static long serialVersionUID = 1386237541043462665L;
 
-    public Integer getNumFound() {
+    public Long getNumFound() {
         return numFound;
     }
 
-    public void setNumFound(Integer numFound) {
+    public void setNumFound(Long numFound) {
         this.numFound = numFound;
     }
 
-    public Integer getStart() {
+    public Long getStart() {
         return start;
     }
 
-    public void setStart(Integer start) {
+    public void setStart(Long start) {
         this.start = start;
     }
 
-    public List<Doc> getDocs() {
+    public List<Object> getDocs() {
         return docs;
     }
 
-    public void setDocs(List<Doc> docs) {
+    public void setDocs(List<Object> docs) {
         this.docs = docs;
     }
 

@@ -1,4 +1,4 @@
-package com.ir.twilytics.apipojo;
+package com.ir.twilytics.model;
 
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +17,24 @@ public class Query {
 	String facetMatches;
 	int rows = 20;
 	String wt = "json";
+	int facetLimit = 10;
+	List<String> filters;
+	
+	public List<String> getFilters() {
+		return filters;
+	}
+
+	public void setFilters(List<String> filters) {
+		this.filters = filters;
+	}
+
+	public int getFacetLimit() {
+		return facetLimit;
+	}
+
+	public void setFacetLimit(int facetLimit) {
+		this.facetLimit = facetLimit;
+	}
 
 	public String getQueryText() {
 		return queryText;
@@ -114,9 +132,17 @@ public class Query {
 		if (!Objects.isNull(facetMatches)) {
 			facetMatchesStr = "&facetMatches=" + facetMatches;
 		}
+		
+		String filtersStr = new String();
+		if (!Objects.isNull(this.filters)) {
+			Iterator filtersItr = this.filters.iterator();
+			while (filtersItr.hasNext()) {
+				filtersStr += "&fq=" + filtersItr.next();
+			}
+		}
 
-		return "q=" + queryText + tweetDateRangeStr + facetStr + facetFieldStr + flStr + facetMatchesStr + "&rows="
-				+ rows + "&wt=" + wt;
+		return "q=" + queryText + tweetDateRangeStr + facetStr + facetFieldStr + flStr + facetMatchesStr +filtersStr+ "&rows="
+				+ rows+"&facet.limit="+facetLimit + "&wt=" + wt;
 	}
 
 }

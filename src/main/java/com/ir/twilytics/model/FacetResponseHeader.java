@@ -1,37 +1,37 @@
 
 package com.ir.twilytics.model;
 
-import org.springframework.stereotype.Service;
-
+import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-@Service
-public class ResponseHeader {
+public class FacetResponseHeader implements Serializable
+{
 
     @SerializedName("status")
     @Expose
-    private Integer status;
+    private Long status;
     @SerializedName("QTime")
     @Expose
-    private Integer qTime;
+    private Long qTime;
     @SerializedName("params")
     @Expose
     private Params params;
+    private final static long serialVersionUID = 1585777828093674111L;
 
-    public Integer getStatus() {
+    public Long getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(Long status) {
         this.status = status;
     }
 
-    public Integer getQTime() {
+    public Long getQTime() {
         return qTime;
     }
 
-    public void setQTime(Integer qTime) {
+    public void setQTime(Long qTime) {
         this.qTime = qTime;
     }
 

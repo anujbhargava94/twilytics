@@ -1,5 +1,5 @@
 
-package com.ir.twilytics.apipojo;
+package com.ir.twilytics.model;
 
 import java.util.List;
 
