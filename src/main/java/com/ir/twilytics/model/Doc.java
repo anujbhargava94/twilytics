@@ -228,6 +228,10 @@ public class Doc {
 		public void setUserLocation(List<String> userLocation) {
 			this.userLocation = userLocation;
 		}
+		
+	    @SerializedName("sentiment")
+	    @Expose
+	    private List<String> sentiment = null;
 
 		public List<String> getPoiName() {
 	        return poiName;
@@ -237,7 +241,15 @@ public class Doc {
 	        this.poiName = poiName;
 	    }
 
-	    public List<BigInteger> getPoiId() {
+	    public List<String> getSentiment() {
+			return sentiment;
+		}
+
+		public void setSentiment(List<String> sentiment) {
+			this.sentiment = sentiment;
+		}
+
+		public List<BigInteger> getPoiId() {
 	        return poiId;
 	    }
 
