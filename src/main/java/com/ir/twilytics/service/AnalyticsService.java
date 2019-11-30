@@ -1,22 +1,18 @@
 package com.ir.twilytics.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.ir.twilytics.dao.QueryBuilder;
-import com.ir.twilytics.model.Doc;
 import com.ir.twilytics.model.FacetFields;
 import com.ir.twilytics.model.FacetedFieldsResponse;
+import com.ir.twilytics.utils.QueryUtils;
 
+@Service
 public class AnalyticsService {
 
 	@Value("${resource.tasks}")
@@ -48,11 +44,7 @@ public class AnalyticsService {
 
 	private FacetFields getFacetedResponse(String url) {
 		// TODO Auto-generated method stub
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		messageConverters.add(new FormHttpMessageConverter());
-		messageConverters.add(new StringHttpMessageConverter());
-		messageConverters.add(new GsonHttpMessageConverter());
-		restTemplate.setMessageConverters(messageConverters);
+		QueryUtils.initialiseRestTemplate(restTemplate);
 		FacetedFieldsResponse facetedFieldsResponse = restTemplate.getForObject(url, FacetedFieldsResponse.class);
 		if (!Objects.isNull(facetedFieldsResponse) && !Objects.isNull(facetedFieldsResponse.getResponse())
 				&& !Objects.isNull(facetedFieldsResponse.getFacetCounts())

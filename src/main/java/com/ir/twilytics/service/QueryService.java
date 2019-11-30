@@ -10,10 +10,7 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.GsonHttpMessageConverter;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,6 +19,7 @@ import com.ir.twilytics.model.Doc;
 import com.ir.twilytics.model.FacetsParam;
 import com.ir.twilytics.model.Tweet;
 import com.ir.twilytics.model.TweetResponse;
+import com.ir.twilytics.utils.QueryUtils;
 
 @Service
 public class QueryService {
@@ -52,7 +50,7 @@ public class QueryService {
 
 	@Autowired
 	private QueryBuilder queryBuilder;
-	
+
 	@Autowired
 	private AnalyticsService analyticsService;
 
@@ -67,11 +65,8 @@ public class QueryService {
 
 	private List<Doc> getQueryResponse(String url) {
 		// TODO Auto-generated method stub
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		messageConverters.add(new FormHttpMessageConverter());
-		messageConverters.add(new StringHttpMessageConverter());
-		messageConverters.add(new GsonHttpMessageConverter());
-		restTemplate.setMessageConverters(messageConverters);
+		
+		QueryUtils.initialiseRestTemplate(restTemplate);
 		TweetResponse tweetResponse = restTemplate.getForObject(url, TweetResponse.class);
 
 		if (!Objects.isNull(tweetResponse) && tweetResponse.getResponse() != null
@@ -87,11 +82,7 @@ public class QueryService {
 		String url = resource
 				+ queryBuilder.addQueryText("full_text:(" + query + ")").addRows(100).getQuery().toString();
 		System.out.println("urls is : " + url);
-		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		messageConverters.add(new FormHttpMessageConverter());
-		messageConverters.add(new StringHttpMessageConverter());
-		messageConverters.add(new GsonHttpMessageConverter());
-		restTemplate.setMessageConverters(messageConverters);
+		QueryUtils.initialiseRestTemplate(restTemplate);
 		TweetResponse tweetResponse = restTemplate.getForObject(url, TweetResponse.class);
 		if (!Objects.isNull(tweetResponse) && tweetResponse.getResponse() != null
 				&& tweetResponse.getResponse().getDocs() != null) {
@@ -110,19 +101,20 @@ public class QueryService {
 		String langQuery = getLangQuery(facetsParam.getLang());
 		String locQuery = getLocationQuery(facetsParam.getLoc());
 		String topicsQuery = getTopicsQuery(facetsParam.getTopics());
-		
+
 		String repliesStr = "";
 		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
-			
-			for(String poiName : facetsParam.getReplies()) {
+
+			for (String poiName : facetsParam.getReplies()) {
 				Long poiId = analyticsService.getPoiId(poiName);
-				if(Objects.nonNull(poiId)&& poiId !=0L) {
-					repliesStr += "replied_to_user_id:"+Long.toString(poiId)+" ";
+				if (Objects.nonNull(poiId) && poiId != 0L) {
+					repliesStr += "replied_to_user_id:" + Long.toString(poiId) + " ";
 				}
 			}
 		}
 
-		String queryText = query + " " + poiNameQuery + " " + langQuery + " " + locQuery + " " + topicsQuery+ " "+repliesStr;
+		String queryText = query + " " + poiNameQuery + " " + langQuery + " " + locQuery + " " + topicsQuery + " "
+				+ repliesStr;
 		String verifiedStr = "";
 		if (!Objects.isNull(facetsParam.getVerified()) && !facetsParam.getVerified().isEmpty()) {
 			verifiedStr = "verified:on";
@@ -135,16 +127,12 @@ public class QueryService {
 			String dateFrom = convertDateForSolr(facetsParam.getDateFrom());
 			dateRangeStr = "tweet_date:[" + dateTo + " TO " + dateFrom + "}";
 		}
-		
-		
 
 		String url = resource + queryBuilder.addQueryText(queryText).addRows(100).addFilter(verifiedStr)
 				.addFilter(dateRangeStr).getQuery().toString();
 		System.out.println("urls is : " + url);
 		return null;
 	}
-
-	
 
 	private String convertDateForSolr(long date) {
 		// TODO Auto-generated method stub
