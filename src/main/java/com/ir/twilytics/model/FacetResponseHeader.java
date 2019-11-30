@@ -2,9 +2,13 @@
 package com.ir.twilytics.model;
 
 import java.io.Serializable;
+
+import org.springframework.stereotype.Service;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+@Service
 public class FacetResponseHeader implements Serializable
 {
 

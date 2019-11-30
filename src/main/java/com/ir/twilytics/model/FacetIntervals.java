@@ -2,6 +2,9 @@ package com.ir.twilytics.model;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class FacetIntervals implements Serializable
 {
 
