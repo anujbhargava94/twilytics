@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Service
 public class FacetsParam {
 

@@ -41,7 +41,7 @@ public class Query {
 	}
 
 	public String getQueryText() {
-		if(Objects.nonNull(this.queryText)){
+		if(Objects.nonNull(this.queryText) && !this.queryText.isEmpty()){
 			return queryText;
 		}
 		else {
