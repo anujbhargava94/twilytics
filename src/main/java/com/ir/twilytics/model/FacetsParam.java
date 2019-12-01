@@ -19,6 +19,22 @@ public class FacetsParam {
 	List<String> topics;
 	long dateFrom;
 	long dateTo;
+	List<String> hashtags;
+	List<String> mentions;
+	
+	
+	public List<String> getHashtags() {
+		return hashtags;
+	}
+	public void setHashtags(List<String> hashtags) {
+		this.hashtags = hashtags;
+	}
+	public List<String> getMentions() {
+		return mentions;
+	}
+	public void setMentions(List<String> mentions) {
+		this.mentions = mentions;
+	}
 	public String getQuery() {
 		return query;
 	}

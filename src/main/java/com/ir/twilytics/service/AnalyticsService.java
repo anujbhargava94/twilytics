@@ -29,11 +29,12 @@ public class AnalyticsService {
 	public FacetFields getFacetedFields(String query) {
 		// TODO Auto-generated method stub
 		String url = resource;
+		String queryText = "";
 		if (query != null && !query.isEmpty()) {
-			url += queryBuilder.addQueryText("full_text:(" + query + ")");
+			queryText = "full_text:(" + query + ")";
 		}
 
-		url += queryBuilder.addFacetField("poi_name").addFacetField("lang").addFacetField("hashtags")
+		url += queryBuilder.addQueryText(queryText).addFacetField("poi_name").addFacetField("lang").addFacetField("hashtags")
 				.addFacetField("mentions").addFacetField("user.location").addFacet("on").addFl("poi_name").addFl("lang")
 				.addRows(0).getQuery().toString();
 		System.out.println("urls is : " + url);

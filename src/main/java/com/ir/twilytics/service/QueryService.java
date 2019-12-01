@@ -10,7 +10,6 @@ import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -65,7 +64,7 @@ public class QueryService {
 
 	private List<Doc> getQueryResponse(String url) {
 		// TODO Auto-generated method stub
-		
+
 		QueryUtils.initialiseRestTemplate(restTemplate);
 		TweetResponse tweetResponse = restTemplate.getForObject(url, TweetResponse.class);
 
@@ -121,7 +120,8 @@ public class QueryService {
 		}
 
 		String dateRangeStr = "";
-		if (Objects.nonNull(facetsParam.getDateTo()) && Objects.nonNull(facetsParam.getDateFrom())) {
+		if (Objects.nonNull(facetsParam.getDateTo()) && facetsParam.getDateTo() != 0
+				&& Objects.nonNull(facetsParam.getDateFrom()) && facetsParam.getDateFrom() != 0) {
 
 			String dateTo = convertDateForSolr(facetsParam.getDateTo());
 			String dateFrom = convertDateForSolr(facetsParam.getDateFrom());
@@ -131,7 +131,7 @@ public class QueryService {
 		String url = resource + queryBuilder.addQueryText(queryText).addRows(100).addFilter(verifiedStr)
 				.addFilter(dateRangeStr).getQuery().toString();
 		System.out.println("urls is : " + url);
-		return null;
+		return getQueryResponse(url);
 	}
 
 	private String convertDateForSolr(long date) {

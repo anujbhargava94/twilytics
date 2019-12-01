@@ -1,10 +1,14 @@
 package com.ir.twilytics.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -20,6 +24,7 @@ public class QueryUtils {
 	}
 
 	public static void initialiseRestTemplate(RestTemplate restTemplate) {
+		
 		// TODO Auto-generated method stub
 		// Add the Jackson Message converter
 				MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();

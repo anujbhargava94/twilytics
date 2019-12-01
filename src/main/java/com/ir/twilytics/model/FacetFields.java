@@ -1,95 +1,103 @@
 package com.ir.twilytics.model;
 
-
-import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import org.springframework.stereotype.Service;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "poi_name", "lang", "hashtags", "mentions", "user.location","poi_id" })
+public class FacetFields {
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-@Service
-public class FacetFields implements Serializable
-{
+	@JsonProperty("poi_name")
+	private List<String> poiName = null;
+	@JsonProperty("lang")
+	private List<String> lang = null;
+	@JsonProperty("hashtags")
+	private List<String> hashtags = null;
+	@JsonProperty("mentions")
+	private List<String> mentions = null;
+	@JsonProperty("user.location")
+	private List<String> userLocation = null;
+	@JsonProperty("poi_id")
+	private List<Long> poiId = null;
 	
-    @SerializedName("poi_name")
-    @Expose
-    private List<String> poiName = null;
-    @SerializedName("lang")
-    @Expose
-    private List<String> lang = null;
-    @SerializedName("full_text")
-    @Expose
-    private List<String> fullText = null;
-    @SerializedName("hashtags")
-    @Expose
-    private List<String> hashtags = null;
-    @SerializedName("mentions")
-    @Expose
-    private List<String> mentions = null;
-    @SerializedName("user.location")
-    @Expose
-    private List<String> userLocation = null;
-    @SerializedName("poi_id")
-    @Expose
-    private List<Long> poiId = null;
-    private final static long serialVersionUID = 4710932155423927645L;
-
-    public List<Long> getPoiId() {
+	@JsonProperty("poi_id")
+	public List<Long> getPoiId() {
 		return poiId;
 	}
-
+	
+	@JsonProperty("poi_id")
 	public void setPoiId(List<Long> poiId) {
 		this.poiId = poiId;
 	}
 
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+	@JsonProperty("poi_name")
 	public List<String> getPoiName() {
-        return poiName;
-    }
+		return poiName;
+	}
 
-    public void setPoiName(List<String> poiName) {
-        this.poiName = poiName;
-    }
+	@JsonProperty("poi_name")
+	public void setPoiName(List<String> poiName) {
+		this.poiName = poiName;
+	}
 
-    public List<String> getLang() {
-        return lang;
-    }
+	@JsonProperty("lang")
+	public List<String> getLang() {
+		return lang;
+	}
 
-    public void setLang(List<String> lang) {
-        this.lang = lang;
-    }
+	@JsonProperty("lang")
+	public void setLang(List<String> lang) {
+		this.lang = lang;
+	}
 
-    public List<String> getFullText() {
-        return fullText;
-    }
+	@JsonProperty("hashtags")
+	public List<String> getHashtags() {
+		return hashtags;
+	}
 
-    public void setFullText(List<String> fullText) {
-        this.fullText = fullText;
-    }
+	@JsonProperty("hashtags")
+	public void setHashtags(List<String> hashtags) {
+		this.hashtags = hashtags;
+	}
 
-    public List<String> getHashtags() {
-        return hashtags;
-    }
+	@JsonProperty("mentions")
+	public List<String> getMentions() {
+		return mentions;
+	}
 
-    public void setHashtags(List<String> hashtags) {
-        this.hashtags = hashtags;
-    }
+	@JsonProperty("mentions")
+	public void setMentions(List<String> mentions) {
+		this.mentions = mentions;
+	}
 
-    public List<String> getMentions() {
-        return mentions;
-    }
+	@JsonProperty("user.location")
+	public List<String> getUserLocation() {
+		return userLocation;
+	}
 
-    public void setMentions(List<String> mentions) {
-        this.mentions = mentions;
-    }
+	@JsonProperty("user.location")
+	public void setUserLocation(List<String> userLocation) {
+		this.userLocation = userLocation;
+	}
 
-    public List<String> getUserLocation() {
-        return userLocation;
-    }
+	@JsonAnyGetter
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    public void setUserLocation(List<String> userLocation) {
-        this.userLocation = userLocation;
-    }
+	@JsonAnySetter
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
 }

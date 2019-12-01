@@ -1,72 +1,89 @@
 package com.ir.twilytics.model;
 
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.io.Serializable;
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "facet_queries", "facet_fields", "facet_ranges", "facet_intervals", "facet_heatmaps" })
+public class FacetCounts {
 
-import org.springframework.stereotype.Service;
+	@JsonProperty("facet_queries")
+	private FacetQueries facetQueries;
+	@JsonProperty("facet_fields")
+	private FacetFields facetFields;
+	@JsonProperty("facet_ranges")
+	private FacetRanges facetRanges;
+	@JsonProperty("facet_intervals")
+	private FacetIntervals facetIntervals;
+	@JsonProperty("facet_heatmaps")
+	private FacetHeatmaps facetHeatmaps;
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+	@JsonProperty("facet_queries")
+	public FacetQueries getFacetQueries() {
+		return facetQueries;
+	}
 
-@Service
-public class FacetCounts implements Serializable
-{
+	@JsonProperty("facet_queries")
+	public void setFacetQueries(FacetQueries facetQueries) {
+		this.facetQueries = facetQueries;
+	}
 
-    @SerializedName("facet_queries")
-    @Expose
-    private FacetQueries facetQueries;
-    @SerializedName("facet_fields")
-    @Expose
-    private FacetFields facetFields;
-    @SerializedName("facet_ranges")
-    @Expose
-    private FacetRanges facetRanges;
-    @SerializedName("facet_intervals")
-    @Expose
-    private FacetIntervals facetIntervals;
-    @SerializedName("facet_heatmaps")
-    @Expose
-    private FacetHeatmaps facetHeatmaps;
-    private final static long serialVersionUID = 4989942876386658738L;
+	@JsonProperty("facet_fields")
+	public FacetFields getFacetFields() {
+		return facetFields;
+	}
 
-    public FacetQueries getFacetQueries() {
-        return facetQueries;
-    }
+	@JsonProperty("facet_fields")
+	public void setFacetFields(FacetFields facetFields) {
+		this.facetFields = facetFields;
+	}
 
-    public void setFacetQueries(FacetQueries facetQueries) {
-        this.facetQueries = facetQueries;
-    }
+	@JsonProperty("facet_ranges")
+	public FacetRanges getFacetRanges() {
+		return facetRanges;
+	}
 
-    public FacetFields getFacetFields() {
-        return facetFields;
-    }
+	@JsonProperty("facet_ranges")
+	public void setFacetRanges(FacetRanges facetRanges) {
+		this.facetRanges = facetRanges;
+	}
 
-    public void setFacetFields(FacetFields facetFields) {
-        this.facetFields = facetFields;
-    }
+	@JsonProperty("facet_intervals")
+	public FacetIntervals getFacetIntervals() {
+		return facetIntervals;
+	}
 
-    public FacetRanges getFacetRanges() {
-        return facetRanges;
-    }
+	@JsonProperty("facet_intervals")
+	public void setFacetIntervals(FacetIntervals facetIntervals) {
+		this.facetIntervals = facetIntervals;
+	}
 
-    public void setFacetRanges(FacetRanges facetRanges) {
-        this.facetRanges = facetRanges;
-    }
+	@JsonProperty("facet_heatmaps")
+	public FacetHeatmaps getFacetHeatmaps() {
+		return facetHeatmaps;
+	}
 
-    public FacetIntervals getFacetIntervals() {
-        return facetIntervals;
-    }
+	@JsonProperty("facet_heatmaps")
+	public void setFacetHeatmaps(FacetHeatmaps facetHeatmaps) {
+		this.facetHeatmaps = facetHeatmaps;
+	}
 
-    public void setFacetIntervals(FacetIntervals facetIntervals) {
-        this.facetIntervals = facetIntervals;
-    }
+	@JsonAnyGetter
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    public FacetHeatmaps getFacetHeatmaps() {
-        return facetHeatmaps;
-    }
-
-    public void setFacetHeatmaps(FacetHeatmaps facetHeatmaps) {
-        this.facetHeatmaps = facetHeatmaps;
-    }
+	@JsonAnySetter
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
 }

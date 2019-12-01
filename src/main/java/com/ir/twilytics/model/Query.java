@@ -13,7 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Query {
 
-	String queryText = "*:*";
+	String queryText;
 	String tweetDateRange;
 	String facet;
 	List<String> facetField;
@@ -23,7 +23,7 @@ public class Query {
 	String wt = "json";
 	int facetLimit = 10;
 	List<String> filters;
-	
+
 	public List<String> getFilters() {
 		return filters;
 	}
@@ -41,7 +41,12 @@ public class Query {
 	}
 
 	public String getQueryText() {
-		return queryText;
+		if(Objects.nonNull(this.queryText)){
+			return queryText;
+		}
+		else {
+			return "*:*";
+		}
 	}
 
 	public void setQueryText(String queryText) {
@@ -136,7 +141,7 @@ public class Query {
 		if (!Objects.isNull(facetMatches)) {
 			facetMatchesStr = "&facetMatches=" + facetMatches;
 		}
-		
+
 		String filtersStr = new String();
 		if (!Objects.isNull(this.filters)) {
 			Iterator filtersItr = this.filters.iterator();
@@ -145,8 +150,8 @@ public class Query {
 			}
 		}
 
-		return "q=" + queryText + tweetDateRangeStr + facetStr + facetFieldStr + flStr + facetMatchesStr +filtersStr+ "&rows="
-				+ rows+"&facet.limit="+facetLimit + "&wt=" + wt;
+		return "q=" + getQueryText() + tweetDateRangeStr + facetStr + facetFieldStr + flStr + facetMatchesStr
+				+ filtersStr + "&rows=" + rows + "&facet.limit=" + facetLimit + "&wt=" + wt;
 	}
 
 }
