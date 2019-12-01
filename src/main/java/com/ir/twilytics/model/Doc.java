@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		"user.has_extended_profile", "user.default_profile", "user.default_profile_image", "user.can_media_tag",
 		"user.followed_by", "user.following", "user.follow_request_sent", "user.notifications", "user.translator_type",
 		"is_quote_status", "retweet_count", "favorite_count", "favorited", "retweeted", "possibly_sensitive", "lang",
-		"tweet_lang", "sentiment", "_version_", "latitude", "longitude", "state","news_url","news","number_of_articles" })
+		"tweet_lang", "sentiment", "_version_", "latitude", "longitude","news_url","news","state","number_of_articles" })
 public class Doc {
 
 	@JsonProperty("created_at")
@@ -172,77 +172,77 @@ public class Doc {
 	@JsonProperty("_version_")
 	private Long version;
 	@JsonProperty("latitude")
-	private double latitude;
+	private List<Long> latitude;
 	@JsonProperty("longitude")
-	private double longitude;
-	@JsonProperty("state")
-	private String state;
+	private List<Long> longitude;
 	@JsonProperty("news_url")
-	private String newsUrl;
+	private List<String> newsUrl;
 	@JsonProperty("news")
-	private String news;
+	private List<String> news;
 	@JsonProperty("number_of_articles")
-	private int numberOfArticles;
+	private List<Long> numberOfArticles;
+	@JsonProperty("state")
+	private List<String> state;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	@JsonProperty("news_url")
-	public String getNewsUrl() {
+	public List<String> getNewsUrl() {
 		return newsUrl;
 	}
 
 	@JsonProperty("news_url")
-	public void setNewsUrl(String newsUrl) {
+	public void setNewsUrl(List<String> newsUrl) {
 		this.newsUrl = newsUrl;
 	}
 
 	@JsonProperty("news")
-	public String getNews() {
+	public List<String> getNews() {
 		return news;
 	}
 
 	@JsonProperty("news")
-	public void setNews(String news) {
+	public void setNews(List<String> news) {
 		this.news = news;
 	}
 
 	@JsonProperty("number_of_articles")
-	public int getNumberOfArticles() {
+	public List<Long> getNumberOfArticles() {
 		return numberOfArticles;
 	}
 
 	@JsonProperty("number_of_articles")
-	public void setNumberOfArticles(int numberOfArticles) {
+	public void setNumberOfArticles(List<Long> numberOfArticles) {
 		this.numberOfArticles = numberOfArticles;
 	}
 
 	@JsonProperty("latitude")
-	public double getLatitude() {
+	public List<Long> getLatitude() {
 		return latitude;
 	}
 
 	@JsonProperty("latitude")
-	public void setLatitude(double latitude) {
+	public void setLatitude(List<Long> latitude) {
 		this.latitude = latitude;
 	}
 
 	@JsonProperty("longitude")
-	public double getLongitude() {
+	public List<Long> getLongitude() {
 		return longitude;
 	}
 
 	@JsonProperty("longitude")
-	public void setLongitude(double longitude) {
+	public void setLongitude(List<Long> longitude) {
 		this.longitude = longitude;
 	}
 
 	@JsonProperty("state")
-	public String getState() {
+	public List<String> getState() {
 		return state;
 	}
 
 	@JsonProperty("state")
-	public void setState(String state) {
+	public void setState(List<String> state) {
 		this.state = state;
 	}
 
