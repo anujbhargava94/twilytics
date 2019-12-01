@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		"user.has_extended_profile", "user.default_profile", "user.default_profile_image", "user.can_media_tag",
 		"user.followed_by", "user.following", "user.follow_request_sent", "user.notifications", "user.translator_type",
 		"is_quote_status", "retweet_count", "favorite_count", "favorited", "retweeted", "possibly_sensitive", "lang",
-		"tweet_lang", "sentiment", "_version_" })
+		"tweet_lang", "sentiment", "_version_","latitude","longitude","state" })
 public class Doc {
 
 	@JsonProperty("created_at")
@@ -171,8 +171,44 @@ public class Doc {
 	private List<String> sentiment = null;
 	@JsonProperty("_version_")
 	private Long version;
+	@JsonProperty("latitude")
+	private double latitude;
+	@JsonProperty("longitude")
+	private double longitude;
+	@JsonProperty("state")
+	private String state;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+	@JsonProperty("latitude")
+	public double getLatitude() {
+		return latitude;
+	}
+
+	@JsonProperty("latitude")
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	@JsonProperty("longitude")
+	public double getLongitude() {
+		return longitude;
+	}
+
+	@JsonProperty("longitude")
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	@JsonProperty("state")
+	public String getState() {
+		return state;
+	}
+
+	@JsonProperty("state")
+	public void setState(String state) {
+		this.state = state;
+	}
 
 	@JsonProperty("created_at")
 	public List<String> getCreatedAt() {
