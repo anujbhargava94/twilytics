@@ -137,7 +137,7 @@ public class QueryService {
 	private String convertDateForSolr(long date) {
 		// TODO Auto-generated method stub
 		Date dateTo = new Date(date);
-		DateFormat format = new SimpleDateFormat("%Y-%m-%dT%H:%M:%SZ");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		String formatted = format.format(dateTo);
 		System.out.println("Date formatted: " + formatted);
 		return formatted;

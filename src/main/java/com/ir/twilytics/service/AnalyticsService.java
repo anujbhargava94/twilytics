@@ -63,7 +63,7 @@ public class AnalyticsService {
 		System.out.println("urls is : " + url);
 
 		FacetFields response = getFacetedResponse(url);
-		if (Objects.nonNull(response) && Objects.nonNull(response.getPoiId())) {
+		if (Objects.nonNull(response) && Objects.nonNull(response.getPoiId()) && !response.getPoiId().isEmpty()) {
 			return response.getPoiId().get(0);
 		} else
 			return 0L;
