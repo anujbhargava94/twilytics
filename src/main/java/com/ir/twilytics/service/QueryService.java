@@ -189,7 +189,7 @@ public class QueryService {
 
 			Iterator poiItr = poiName.iterator();
 			while (poiItr.hasNext()) {
-				queryText += "poi_name:" + poiItr.next() + " ";
+				queryText += "user.screen_name:" + poiItr.next() + " ";
 			}
 		}
 		return queryText;

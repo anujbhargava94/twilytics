@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "poi_name", "lang", "hashtags", "mentions", "user.location", "poi_id" })
+@JsonPropertyOrder({ "poi_name", "lang", "hashtags", "mentions", "user.location", "poi_id","user.screen_name","user,id" })
 public class FacetFields {
 
 	@JsonProperty("poi_name")
@@ -28,6 +28,33 @@ public class FacetFields {
 	private List<String> userLocation = null;
 	@JsonProperty("poi_id")
 	private List<Long> poiId = null;
+	@JsonProperty("user.screen_name")
+	private List<String> userScreenName = null;
+	@JsonProperty("user.id")
+	private List<Long> userId = null;
+	
+
+	@JsonProperty("user.screen_name")
+	public List<String> getUserScreenName() {
+		return userScreenName;
+	}
+
+	@JsonProperty("user.screen_name")
+	public void setUserScreenName(List<String> userScreenName) {
+		removeCount(userScreenName);
+		this.userScreenName = userScreenName;
+	}
+
+	@JsonProperty("user.id")
+	public List<Long> getUserId() {
+		return userId;
+	}
+
+	@JsonProperty("user.id")
+	public void setUserId(List<Long> userId) {
+		removeCount(userId);
+		this.userId = userId;
+	}
 
 	@JsonProperty("poi_id")
 	public List<Long> getPoiId() {
@@ -37,11 +64,7 @@ public class FacetFields {
 
 	@JsonProperty("poi_id")
 	public void setPoiId(List<Long> poiId) {
-		if (Objects.nonNull(poiId)) {
-			for (int i = 1; i < poiId.size(); i++) {
-				poiId.remove(i);
-			}
-		}
+		removeCount(poiId);
 		this.poiId = poiId;
 	}
 
@@ -56,11 +79,7 @@ public class FacetFields {
 
 	@JsonProperty("poi_name")
 	public void setPoiName(List<String> poiName) {
-		if (Objects.nonNull(poiName)) {
-			for (int i = 1; i < poiName.size(); i++) {
-				poiName.remove(i);
-			}
-		}
+		removeCount(poiName);
 		this.poiName = poiName;
 	}
 
@@ -71,11 +90,7 @@ public class FacetFields {
 
 	@JsonProperty("lang")
 	public void setLang(List<String> lang) {
-		if (Objects.nonNull(lang)) {
-			for (int i = 1; i < lang.size(); i++) {
-				lang.remove(i);
-			}
-		}
+		removeCount(lang);
 		this.lang = lang;
 	}
 
@@ -87,11 +102,7 @@ public class FacetFields {
 
 	@JsonProperty("hashtags")
 	public void setHashtags(List<String> hashtags) {
-		if (Objects.nonNull(hashtags)) {
-			for (int i = 1; i < hashtags.size(); i++) {
-				hashtags.remove(i);
-			}
-		}
+		removeCount(hashtags);
 		this.hashtags = hashtags;
 	}
 
@@ -103,11 +114,7 @@ public class FacetFields {
 
 	@JsonProperty("mentions")
 	public void setMentions(List<String> mentions) {
-		if (Objects.nonNull(mentions)) {
-			for (int i = 1; i < mentions.size(); i++) {
-				mentions.remove(i);
-			}
-		}
+		removeCount(mentions);
 		this.mentions = mentions;
 	}
 
@@ -119,11 +126,7 @@ public class FacetFields {
 
 	@JsonProperty("user.location")
 	public void setUserLocation(List<String> userLocation) {
-		if (Objects.nonNull(userLocation)) {
-			for (int i = 1; i < userLocation.size(); i++) {
-				userLocation.remove(i);
-			}
-		}
+		removeCount(userLocation);
 		this.userLocation = userLocation;
 	}
 
@@ -135,6 +138,15 @@ public class FacetFields {
 	@JsonAnySetter
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
+	}
+	
+	private <T> void removeCount(List<T> field) {
+		if (Objects.nonNull(field)) {
+			for (int i = 1; i < field.size(); i++) {
+				field.remove(i);
+			}
+		}
+		
 	}
 
 }
