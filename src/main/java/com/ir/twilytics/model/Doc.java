@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		"user.has_extended_profile", "user.default_profile", "user.default_profile_image", "user.can_media_tag",
 		"user.followed_by", "user.following", "user.follow_request_sent", "user.notifications", "user.translator_type",
 		"is_quote_status", "retweet_count", "favorite_count", "favorited", "retweeted", "possibly_sensitive", "lang",
-		"tweet_lang", "sentiment", "_version_","latitude","longitude","state" })
+		"tweet_lang", "sentiment", "_version_", "latitude", "longitude", "state","news_url","news","number_of_articles" })
 public class Doc {
 
 	@JsonProperty("created_at")
@@ -177,8 +177,44 @@ public class Doc {
 	private double longitude;
 	@JsonProperty("state")
 	private String state;
+	@JsonProperty("news_url")
+	private String newsUrl;
+	@JsonProperty("news")
+	private String news;
+	@JsonProperty("number_of_articles")
+	private int numberOfArticles;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+	@JsonProperty("news_url")
+	public String getNewsUrl() {
+		return newsUrl;
+	}
+
+	@JsonProperty("news_url")
+	public void setNewsUrl(String newsUrl) {
+		this.newsUrl = newsUrl;
+	}
+
+	@JsonProperty("news")
+	public String getNews() {
+		return news;
+	}
+
+	@JsonProperty("news")
+	public void setNews(String news) {
+		this.news = news;
+	}
+
+	@JsonProperty("number_of_articles")
+	public int getNumberOfArticles() {
+		return numberOfArticles;
+	}
+
+	@JsonProperty("number_of_articles")
+	public void setNumberOfArticles(int numberOfArticles) {
+		this.numberOfArticles = numberOfArticles;
+	}
 
 	@JsonProperty("latitude")
 	public double getLatitude() {
