@@ -20,7 +20,12 @@ public class AnalyticsController {
 
 	@RequestMapping(value = "/fields", method = RequestMethod.GET)
 	public @ResponseBody String getFacetedFields(@RequestParam("name") String query) {
-		FacetFields tweets = analyticsService.getFacetedFields(query);
+		FacetFields tweets = new FacetFields();
+		try {
+			tweets = analyticsService.getFacetedFields(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Gson jsonString = new Gson();
 		return jsonString.toJson(tweets);
 	}

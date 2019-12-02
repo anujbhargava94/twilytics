@@ -1,5 +1,6 @@
 package com.ir.twilytics.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +26,26 @@ public class QueryController {
 
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	public @ResponseBody String getTweets(@RequestParam("name") String query) {
-		List<Doc> tweets = queryService.findAll(query);
+		List<Doc> tweets = new ArrayList<>();
+		try {
+			tweets = queryService.findAll(query);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Gson jsonString = new Gson();
 		return jsonString.toJson(tweets);
 	}
 
 	@RequestMapping(value = "/facet", method = RequestMethod.GET)
 	public @ResponseBody String getFacetedTweets(@RequestBody FacetsParam facetsParam) {
-		List<Doc> tweets = queryService.getFacetedResults(facetsParam);
+		List<Doc> tweets = new ArrayList<>();
+		try {
+			tweets = queryService.getFacetedResults(facetsParam);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Gson jsonString = new Gson();
 		return jsonString.toJson(tweets);
 	}
-	
-	
+
 }
