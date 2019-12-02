@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		"user.has_extended_profile", "user.default_profile", "user.default_profile_image", "user.can_media_tag",
 		"user.followed_by", "user.following", "user.follow_request_sent", "user.notifications", "user.translator_type",
 		"is_quote_status", "retweet_count", "favorite_count", "favorited", "retweeted", "possibly_sensitive", "lang",
-		"tweet_lang", "sentiment", "_version_", "latitude", "longitude","news_url","news","state","number_of_articles" })
+		"tweet_lang", "sentiment", "_version_", "latitude", "longitude","news_url","news","state","number_of_articles","tweet_date" })
 public class Doc {
 
 	@JsonProperty("created_at")
@@ -176,24 +176,26 @@ public class Doc {
 	@JsonProperty("longitude")
 	private List<Long> longitude;
 	@JsonProperty("news_url")
-	private List<String> newsUrl;
+	private List<String> news_url;
 	@JsonProperty("news")
 	private List<String> news;
 	@JsonProperty("number_of_articles")
 	private List<Long> numberOfArticles;
 	@JsonProperty("state")
 	private List<String> state;
+	@JsonProperty("tweet_date")
+	private List<String> tweet_date;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	@JsonProperty("news_url")
 	public List<String> getNewsUrl() {
-		return newsUrl;
+		return news_url;
 	}
 
 	@JsonProperty("news_url")
-	public void setNewsUrl(List<String> newsUrl) {
-		this.newsUrl = newsUrl;
+	public void setNewsUrl(List<String> news_url) {
+		this.news_url = news_url;
 	}
 
 	@JsonProperty("news")
@@ -254,6 +256,16 @@ public class Doc {
 	@JsonProperty("created_at")
 	public void setCreatedAt(List<String> createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	@JsonProperty("tweet_date")
+	public List<String> getTweetDate() {
+		return tweet_date;
+	}
+
+	@JsonProperty("tweet_date")
+	public void setTweetDate(List<String> tweet_date) {
+		this.createdAt = tweet_date;
 	}
 
 	@JsonProperty("id")
