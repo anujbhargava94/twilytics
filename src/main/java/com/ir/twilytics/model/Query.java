@@ -135,7 +135,7 @@ public class Query {
 			tweetDateRangeStr = "&tweet_date=" + tweetDateRange;
 		}
 		String facetStr = new String();
-		if (!Objects.isNull(facet) && facet.trim().isEmpty()) {
+		if (!Objects.isNull(facet) && !facet.trim().isEmpty()) {
 			facetStr = "&facet=" + facet;
 		}
 		String facetMatchesStr = new String();
