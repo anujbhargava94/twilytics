@@ -36,7 +36,7 @@ public class QueryController {
 		return jsonString.toJson(tweets);
 	}
 
-	@RequestMapping(value = "/facet", method = RequestMethod.GET)
+	@RequestMapping(value = "/facet", method = RequestMethod.POST)
 	public @ResponseBody String getFacetedTweets(@RequestBody FacetsParam facetsParam) {
 		List<Doc> tweets = new ArrayList<>();
 		try {
