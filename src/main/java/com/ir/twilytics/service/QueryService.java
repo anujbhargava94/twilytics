@@ -96,10 +96,10 @@ public class QueryService {
 		String query = (!Objects.isNull(facetsParam.getQuery()) && !facetsParam.getQuery().isEmpty())
 				? "full_text:(" + facetsParam.getQuery() + ")"
 				: "";
-		String poiNameQuery = getPoiNameQuery(facetsParam.getPoiName());
-		String langQuery = getLangQuery(facetsParam.getLang());
-		String locQuery = getLocationQuery(facetsParam.getLoc());
-		String topicsQuery = getTopicsQuery(facetsParam.getTopics());
+		getPoiNameQuery(queryBuilder, facetsParam.getPoiName());
+		getLangQuery(queryBuilder, facetsParam.getLang());
+		getLocationQuery(queryBuilder, facetsParam.getLoc());
+		getTopicsQuery(queryBuilder, facetsParam.getTopics());
 
 		String repliesStr = "";
 		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
@@ -112,8 +112,8 @@ public class QueryService {
 			}
 		}
 
-		String queryText = query + " " + poiNameQuery + " " + langQuery + " " + locQuery + " " + topicsQuery + " "
-				+ repliesStr;
+//		String queryText = query + " " + poiNameQuery + " " + langQuery + " " + locQuery + " " + topicsQuery + " "
+//				+ repliesStr;
 		String verifiedStr = "";
 		if (!Objects.isNull(facetsParam.getVerified()) && !facetsParam.getVerified().isEmpty()) {
 			verifiedStr = "verified:on";
@@ -128,8 +128,8 @@ public class QueryService {
 			dateRangeStr = "tweet_date:[" + dateTo + " TO " + dateFrom + "}";
 		}
 
-		String url = resource + queryBuilder.addQueryText(queryText).addRows(100).addFilter(verifiedStr)
-				.addFilter(dateRangeStr).getQuery().toString();
+		String url = resource + queryBuilder.addQueryText(query).addRows(100).addFilter(verifiedStr)
+				.addFilter(repliesStr).addFilter(dateRangeStr).getQuery().toString();
 		System.out.println("urls is : " + url);
 		return getQueryResponse(url);
 	}
@@ -143,56 +143,52 @@ public class QueryService {
 		return formatted;
 	}
 
-	private String getTopicsQuery(List<String> topics) {
+	private void getTopicsQuery(QueryBuilder queryBuilder2, List<String> topics) {
 		// TODO Auto-generated method stub
 		String queryText = new String();
 		if (!Objects.isNull(topics)) {
 
 			Iterator poiItr = topics.iterator();
 			while (poiItr.hasNext()) {
-				queryText += "full_text:" + poiItr.next() + " ";
+				queryBuilder.addFilter("full_text:" + poiItr.next());
 			}
 		}
-		return queryText;
 	}
 
-	private String getLocationQuery(List<String> loc) {
+	private void getLocationQuery(QueryBuilder queryBuilder2, List<String> loc) {
 		// TODO Auto-generated method stub
 		String queryText = new String();
 		if (!Objects.isNull(loc)) {
 
 			Iterator poiItr = loc.iterator();
 			while (poiItr.hasNext()) {
-				queryText += "user.location:" + poiItr.next() + " ";
+				queryBuilder.addFilter("user.location:" + poiItr.next());
 			}
 		}
-		return queryText;
 	}
 
-	private String getLangQuery(List<String> lang) {
+	private void getLangQuery(QueryBuilder queryBuilder2, List<String> lang) {
 		// TODO Auto-generated method stub
 		String queryText = new String();
 		if (!Objects.isNull(lang)) {
 
 			Iterator poiItr = lang.iterator();
 			while (poiItr.hasNext()) {
-				queryText += "lang:" + poiItr.next() + " ";
+				queryBuilder.addFilter("lang:" + poiItr.next());
 			}
 		}
-		return queryText;
 	}
 
-	private String getPoiNameQuery(List<String> poiName) {
+	private void getPoiNameQuery(QueryBuilder queryBuilder2, List<String> poiName) {
 		// TODO Auto-generated method stub
 		String queryText = new String();
 		if (!Objects.isNull(poiName)) {
 
 			Iterator poiItr = poiName.iterator();
 			while (poiItr.hasNext()) {
-				queryText += "user.screen_name:" + poiItr.next() + " ";
+				queryBuilder.addFilter("user.screen_name:" + poiItr.next());
 			}
 		}
-		return queryText;
 	}
 
 }
