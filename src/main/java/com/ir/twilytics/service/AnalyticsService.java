@@ -34,8 +34,8 @@ public class AnalyticsService {
 			queryText = "full_text:(" + query + ")";
 		}
 
-		url += queryBuilder.addQueryText(queryText).addFacetField("poi_name").addFacetField("lang").addFacetField("hashtags")
-				.addFacetField("mentions").addFacetField("user.location").addFacet("on").addFl("poi_name").addFl("lang")
+		url += queryBuilder.addQueryText(queryText).addFacetField("user.screen_name").addFacetField("lang").addFacetField("hashtags")
+				.addFacetField("mentions").addFacetField("user.location").addFacet("on").addFl("user.screen_name").addFl("lang")
 				.addRows(0).getQuery().toString();
 		System.out.println("urls is : " + url);
 
@@ -58,13 +58,13 @@ public class AnalyticsService {
 
 	public Long getPoiId(String poiName) {
 		// TODO Auto-generated method stub
-		String url = resource + queryBuilder.addQueryText("poi_name:(" + poiName + ")").addRows(0).addFacet("on")
-				.addFacetField("poi" + "_id").getQuery().toString();
+		String url = resource + queryBuilder.addQueryText("user.screen_name:(" + poiName + ")").addRows(0).addFacet("on")
+				.addFacetField("user.id").getQuery().toString();
 		System.out.println("urls is : " + url);
 
 		FacetFields response = getFacetedResponse(url);
-		if (Objects.nonNull(response) && Objects.nonNull(response.getPoiId()) && !response.getPoiId().isEmpty()) {
-			return response.getPoiId().get(0);
+		if (Objects.nonNull(response) && Objects.nonNull(response.getUserId()) && !response.getUserId().isEmpty()) {
+			return response.getUserId().get(0);
 		} else
 			return 0L;
 	}
