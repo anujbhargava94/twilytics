@@ -54,8 +54,11 @@ public class QueryService {
 	private AnalyticsService analyticsService;
 
 	public List<Doc> findAll(String query) {
+		String queryStr = (Objects.nonNull(query) && !query.isEmpty())
+				? "full_text:(" + query + ")"
+				: "";
 		String url = resource
-				+ queryBuilder.addQueryText("full_text:(" + query + ")").addRows(100).getQuery().toString();
+				+ queryBuilder.addQueryText(queryStr).addRows(100).getQuery().toString();
 		System.out.println("urls is : " + url);
 
 		return getQueryResponse(url);

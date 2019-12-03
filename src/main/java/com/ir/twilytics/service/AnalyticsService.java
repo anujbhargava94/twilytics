@@ -56,6 +56,7 @@ public class AnalyticsService {
 		}
 	}
 
+	//queryBuilder is not getting reinitialized 
 	public Long getPoiId(String poiName) {
 		// TODO Auto-generated method stub
 		String url = resource + queryBuilder.addQueryText("user.screen_name:(" + poiName + ")").addRows(0).addFacet("on")
