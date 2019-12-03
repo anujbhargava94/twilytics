@@ -18,8 +18,8 @@ public class FacetsParam {
 	List<String> lang;
 	List<String> loc;
 	List<String> topics;
-	long dateFrom;
-	long dateTo;
+	String dateFrom;
+	String dateTo;
 	List<String> hashtags;
 	List<String> mentions;
 	
@@ -78,16 +78,16 @@ public class FacetsParam {
 	public void setTopics(List<String> topics) {
 		this.topics = topics;
 	}
-	public long getDateFrom() {
+	public String getDateFrom() {
 		return dateFrom;
 	}
-	public void setDateFrom(long dateFrom) {
+	public void setDateFrom(String dateFrom) {
 		this.dateFrom = dateFrom;
 	}
-	public long getDateTo() {
+	public String getDateTo() {
 		return dateTo;
 	}
-	public void setDateTo(long dateTo) {
+	public void setDateTo(String dateTo) {
 		this.dateTo = dateTo;
 	}
 	

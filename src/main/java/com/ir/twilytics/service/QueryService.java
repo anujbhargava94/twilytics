@@ -122,8 +122,8 @@ public class QueryService {
 		}
 
 		String dateRangeStr = "";
-		if (Objects.nonNull(facetsParam.getDateTo()) && facetsParam.getDateTo() != 0
-				&& Objects.nonNull(facetsParam.getDateFrom()) && facetsParam.getDateFrom() != 0) {
+		if (Objects.nonNull(facetsParam.getDateTo()) && !facetsParam.getDateTo().trim().isEmpty()
+				&& Objects.nonNull(facetsParam.getDateFrom()) && !facetsParam.getDateFrom().trim().isEmpty()) {
 
 			String dateTo = convertDateForSolr(facetsParam.getDateTo());
 			String dateFrom = convertDateForSolr(facetsParam.getDateFrom());
@@ -136,9 +136,10 @@ public class QueryService {
 		return getQueryResponse(url);
 	}
 
-	private String convertDateForSolr(long date) {
+	private String convertDateForSolr(String date) {
 		// TODO Auto-generated method stub
-		Date dateTo = new Date(date);
+		long dateL = Long.valueOf(date);
+		Date dateTo = new Date(dateL);
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 		String formatted = format.format(dateTo);
 		System.out.println("Date formatted: " + formatted);
