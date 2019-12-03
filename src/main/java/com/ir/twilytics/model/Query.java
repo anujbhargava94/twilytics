@@ -41,16 +41,17 @@ public class Query {
 	}
 
 	public String getQueryText() {
-		if(Objects.nonNull(this.queryText) && !this.queryText.isEmpty()){
-			return queryText;
-		}
-		else {
-			return "*:*";
-		}
+		return queryText;
 	}
 
 	public void setQueryText(String queryText) {
-		this.queryText = queryText;
+		if(Objects.nonNull(queryText) && !queryText.trim().isEmpty()){
+			this.queryText = queryText;
+		}
+		else {
+			this.queryText = "*:*";
+		}
+		
 	}
 
 	public String getTweetDateRange() {
@@ -134,11 +135,11 @@ public class Query {
 			tweetDateRangeStr = "&tweet_date=" + tweetDateRange;
 		}
 		String facetStr = new String();
-		if (!Objects.isNull(facet)) {
+		if (!Objects.isNull(facet) && facet.trim().isEmpty()) {
 			facetStr = "&facet=" + facet;
 		}
 		String facetMatchesStr = new String();
-		if (!Objects.isNull(facetMatches)) {
+		if (!Objects.isNull(facetMatches) && !facetMatches.trim().isEmpty()) {
 			facetMatchesStr = "&facetMatches=" + facetMatches;
 		}
 
