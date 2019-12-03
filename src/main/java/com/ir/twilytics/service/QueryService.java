@@ -97,11 +97,11 @@ public class QueryService {
 				? "full_text:(" + facetsParam.getQuery() + ")"
 				: "";
 		setFilterFieldsInQuery(facetsParam.getPoiName(), "user.screen_name");
-		setFilterFieldsInQuery(facetsParam.getLang(),"lang");
-		setFilterFieldsInQuery(facetsParam.getLoc(),"user.location");
+		setFilterFieldsInQuery(facetsParam.getLang(), "lang");
+		setFilterFieldsInQuery(facetsParam.getLoc(), "user.location");
 		setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
-		setFilterFieldsInQuery(facetsParam.getHashtags(),"hashtags");
-		setFilterFieldsInQuery(facetsParam.getMentions(),"mentions");
+		setFilterFieldsInQuery(facetsParam.getHashtags(), "hashtags");
+		setFilterFieldsInQuery(facetsParam.getMentions(), "mentions");
 
 		String repliesStr = "";
 		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
@@ -127,7 +127,7 @@ public class QueryService {
 
 			String dateTo = convertDateForSolr(facetsParam.getDateTo());
 			String dateFrom = convertDateForSolr(facetsParam.getDateFrom());
-			dateRangeStr = "tweet_date:[" + dateTo + " TO " + dateFrom + "}";
+			dateRangeStr = "tweet_date:[" + dateFrom + " TO " + dateTo + "}";
 		}
 
 		String url = resource + queryBuilder.addQueryText(query).addRows(100).addFilter(verifiedStr)
@@ -149,10 +149,10 @@ public class QueryService {
 		if (!Objects.isNull(fieldVals)) {
 			Iterator poiItr = fieldVals.iterator();
 			while (poiItr.hasNext()) {
-				queryBuilder.addFilter(field+":" + poiItr.next());
+				queryBuilder.addFilter(field + ":" + poiItr.next());
 			}
 		}
-		
+
 	}
 
 }
