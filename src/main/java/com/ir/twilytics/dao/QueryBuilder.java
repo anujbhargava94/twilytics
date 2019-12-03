@@ -1,10 +1,14 @@
 package com.ir.twilytics.dao;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.ir.twilytics.model.Query;
 
 @Service
+@Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public interface QueryBuilder {
 
 	public QueryBuilder addQueryText(String queryText);

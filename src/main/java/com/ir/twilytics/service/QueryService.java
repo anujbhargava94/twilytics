@@ -96,10 +96,12 @@ public class QueryService {
 		String query = (!Objects.isNull(facetsParam.getQuery()) && !facetsParam.getQuery().isEmpty())
 				? "full_text:(" + facetsParam.getQuery() + ")"
 				: "";
-		getPoiNameQuery(queryBuilder, facetsParam.getPoiName());
-		getLangQuery(queryBuilder, facetsParam.getLang());
-		getLocationQuery(queryBuilder, facetsParam.getLoc());
-		getTopicsQuery(queryBuilder, facetsParam.getTopics());
+		setFilterFieldsInQuery(facetsParam.getPoiName(), "user.screen_name");
+		setFilterFieldsInQuery(facetsParam.getLang(),"lang");
+		setFilterFieldsInQuery(facetsParam.getLoc(),"user.location");
+		setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
+		setFilterFieldsInQuery(facetsParam.getHashtags(),"hashtags");
+		setFilterFieldsInQuery(facetsParam.getMentions(),"mentions");
 
 		String repliesStr = "";
 		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
@@ -143,52 +145,14 @@ public class QueryService {
 		return formatted;
 	}
 
-	private void getTopicsQuery(QueryBuilder queryBuilder2, List<String> topics) {
-		// TODO Auto-generated method stub
-		String queryText = new String();
-		if (!Objects.isNull(topics)) {
-
-			Iterator poiItr = topics.iterator();
+	private <T> void setFilterFieldsInQuery(List<T> fieldVals, String field) {
+		if (!Objects.isNull(fieldVals)) {
+			Iterator poiItr = fieldVals.iterator();
 			while (poiItr.hasNext()) {
-				queryBuilder.addFilter("full_text:" + poiItr.next());
+				queryBuilder.addFilter(field+":" + poiItr.next());
 			}
 		}
-	}
-
-	private void getLocationQuery(QueryBuilder queryBuilder2, List<String> loc) {
-		// TODO Auto-generated method stub
-		String queryText = new String();
-		if (!Objects.isNull(loc)) {
-
-			Iterator poiItr = loc.iterator();
-			while (poiItr.hasNext()) {
-				queryBuilder.addFilter("user.location:" + poiItr.next());
-			}
-		}
-	}
-
-	private void getLangQuery(QueryBuilder queryBuilder2, List<String> lang) {
-		// TODO Auto-generated method stub
-		String queryText = new String();
-		if (!Objects.isNull(lang)) {
-
-			Iterator poiItr = lang.iterator();
-			while (poiItr.hasNext()) {
-				queryBuilder.addFilter("lang:" + poiItr.next());
-			}
-		}
-	}
-
-	private void getPoiNameQuery(QueryBuilder queryBuilder2, List<String> poiName) {
-		// TODO Auto-generated method stub
-		String queryText = new String();
-		if (!Objects.isNull(poiName)) {
-
-			Iterator poiItr = poiName.iterator();
-			while (poiItr.hasNext()) {
-				queryBuilder.addFilter("user.screen_name:" + poiItr.next());
-			}
-		}
+		
 	}
 
 }

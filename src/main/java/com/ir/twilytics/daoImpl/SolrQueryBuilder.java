@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.ir.twilytics.dao.QueryBuilder;
 import com.ir.twilytics.model.Query;
 
+
 public class SolrQueryBuilder implements QueryBuilder {
 
 	@Autowired

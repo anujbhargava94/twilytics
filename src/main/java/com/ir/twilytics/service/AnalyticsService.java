@@ -60,7 +60,7 @@ public class AnalyticsService {
 		// TODO Auto-generated method stub
 		String url = resource + queryBuilder.addQueryText("user.screen_name:(" + poiName + ")").addRows(0).addFacet("on")
 				.addFacetField("user.id").getQuery().toString();
-		System.out.println("urls is : " + url);
+		System.out.println("urls for poiId is : " + url);
 
 		FacetFields response = getFacetedResponse(url);
 		if (Objects.nonNull(response) && Objects.nonNull(response.getUserId()) && !response.getUserId().isEmpty()) {
