@@ -58,7 +58,7 @@ public class QueryService {
 				? "full_text:(" + query + ")"
 				: "";
 		String url = resource
-				+ queryBuilder.addQueryText(queryStr).addRows(100).getQuery().toString();
+				+ queryBuilder.addQueryText(queryStr).addRows(1000).getQuery().toString();
 		System.out.println("urls is : " + url);
 
 		return getQueryResponse(url);
