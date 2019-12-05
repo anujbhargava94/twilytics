@@ -18,8 +18,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-"row",
-"facet",
 "query",
 "poiName",
 "lang",
@@ -34,22 +32,20 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class FacetsParam {
 
-@JsonProperty("row")
 private Integer rows;
-@JsonProperty("facet")
 private String facet;
 @JsonProperty("query")
 private String query;
 @JsonProperty("poiName")
 private List<String> poiName = null;
 @JsonProperty("lang")
-private List<Object> lang = null;
+private List<String> lang = null;
 @JsonProperty("hashtags")
-private List<Object> hashtags = null;
+private List<String> hashtags = null;
 @JsonProperty("mentions")
-private List<Object> mentions = null;
+private List<String> mentions = null;
 @JsonProperty("loc")
-private List<Object> loc = null;
+private List<String> loc = null;
 @JsonProperty("dateTo")
 private String dateTo;
 @JsonProperty("dateFrom")
@@ -80,10 +76,8 @@ public FacetsParam() {
 * @param dateFrom
 * @param facet
 */
-public FacetsParam(Integer row, String facet, String query, List<String> poiName, List<Object> lang, List<Object> hashtags, List<Object> mentions, List<Object> loc, String dateTo, String dateFrom, String verified) {
+public FacetsParam(String query, List<String> poiName, List<String> lang, List<String> hashtags, List<String> mentions, List<String> loc, String dateTo, String dateFrom, String verified) {
 super();
-this.rows = row;
-this.facet = facet;
 this.query = query;
 this.poiName = poiName;
 this.lang = lang;
@@ -95,22 +89,17 @@ this.dateFrom = dateFrom;
 this.verified = verified;
 }
 
-@JsonProperty("row")
 public Integer getRows() {
 return rows;
 }
 
-@JsonProperty("row")
 public void setRows(Integer row) {
 this.rows = row;
 }
-
-@JsonProperty("facet")
 public String getFacet() {
 return facet;
 }
 
-@JsonProperty("facet")
 public void setFacet(String facet) {
 this.facet = facet;
 }
@@ -136,42 +125,42 @@ this.poiName = poiName;
 }
 
 @JsonProperty("lang")
-public List<Object> getLang() {
+public List<String> getLang() {
 return lang;
 }
 
 @JsonProperty("lang")
-public void setLang(List<Object> lang) {
+public void setLang(List<String> lang) {
 this.lang = lang;
 }
 
 @JsonProperty("hashtags")
-public List<Object> getHashtags() {
+public List<String> getHashtags() {
 return hashtags;
 }
 
 @JsonProperty("hashtags")
-public void setHashtags(List<Object> hashtags) {
+public void setHashtags(List<String> hashtags) {
 this.hashtags = hashtags;
 }
 
 @JsonProperty("mentions")
-public List<Object> getMentions() {
+public List<String> getMentions() {
 return mentions;
 }
 
 @JsonProperty("mentions")
-public void setMentions(List<Object> mentions) {
+public void setMentions(List<String> mentions) {
 this.mentions = mentions;
 }
 
 @JsonProperty("loc")
-public List<Object> getLoc() {
+public List<String> getLoc() {
 return loc;
 }
 
 @JsonProperty("loc")
-public void setLoc(List<Object> loc) {
+public void setLoc(List<String> loc) {
 this.loc = loc;
 }
 
