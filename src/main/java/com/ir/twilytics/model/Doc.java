@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 		"user.has_extended_profile", "user.default_profile", "user.default_profile_image", "user.can_media_tag",
 		"user.followed_by", "user.following", "user.follow_request_sent", "user.notifications", "user.translator_type",
 		"is_quote_status", "retweet_count", "favorite_count", "favorited", "retweeted", "possibly_sensitive", "lang",
-		"tweet_lang", "sentiment", "_version_", "latitude", "longitude","news_url","news","state","number_of_articles","tweet_date" })
+		"tweet_lang", "sentiment", "_version_", "latitude", "longitude","news_url","news","state","number_of_articles","tweet_date","userName" })
 public class Doc {
 
 	@JsonProperty("created_at")
@@ -185,6 +185,19 @@ public class Doc {
 	private List<String> state;
 	@JsonProperty("tweet_date")
 	private List<String> tweet_date;
+	@JsonProperty("userName")
+	private List<String> username;
+	
+	@JsonProperty("userName")
+	public List<String> getUsername() {
+		return username;
+	}
+
+	@JsonProperty("userName")
+	public void setUsername(List<String> username) {
+		this.username = username;
+	}
+
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
