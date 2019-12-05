@@ -22,8 +22,22 @@ public class FacetsParam {
 	String dateTo;
 	List<String> hashtags;
 	List<String> mentions;
+	int rows =100;
+	String facet;
 	
 	
+	public int getRows() {
+		return rows;
+	}
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+	public String getFacet() {
+		return facet;
+	}
+	public void setFacet(String facet) {
+		this.facet = facet;
+	}
 	public List<String> getHashtags() {
 		return hashtags;
 	}

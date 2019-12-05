@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,10 +36,10 @@ public class QueryController {
 	}
 
 	@RequestMapping(value = "/facet", method = RequestMethod.POST)
-	public @ResponseBody String getFacetedTweets(@RequestBody FacetsParam facetsParam) {
+	public @ResponseBody String getFacetedTweets(@RequestBody FacetsParam facetsParam, @RequestParam("name") String query) {
 		List<Doc> tweets = new ArrayList<>();
 		try {
-			tweets = queryService.getFacetedResults(facetsParam);
+			tweets = queryService.getFacetedResults(facetsParam, query);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
