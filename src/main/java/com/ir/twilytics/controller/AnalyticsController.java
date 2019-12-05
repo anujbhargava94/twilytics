@@ -30,7 +30,7 @@ public class AnalyticsController {
 		//List<Doc> tweets = new ArrayList<Doc>();
 		try {
 			facetsParam.setRows(0);
-			facetsParam.setFacet("on");
+			facetsParam.setFacet("true");
 			tweets = analyticsService.getFacetedFields(facetsParam, query);
 			//tweets = queryService.getFacetedResults(facetsParam);
 		} catch (Exception e) {

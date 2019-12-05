@@ -107,20 +107,20 @@ public class QueryService {
 		setFilterFieldsInQuery(facetsParam.getPoiName(), "user.screen_name");
 		setFilterFieldsInQuery(facetsParam.getLang(), "lang");
 		setFilterFieldsInQuery(facetsParam.getLoc(), "user.location");
-		setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
+		//setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
 		setFilterFieldsInQuery(facetsParam.getHashtags(), "hashtags");
 		setFilterFieldsInQuery(facetsParam.getMentions(), "mentions");
 
 		String repliesStr = "";
-		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
-
-			for (String poiName : facetsParam.getReplies()) {
-				Long poiId = analyticsService.getPoiId(poiName);
-				if (Objects.nonNull(poiId) && poiId != 0L) {
-					repliesStr += "replied_to_user_id:" + Long.toString(poiId) + " ";
-				}
-			}
-		}
+//		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
+//
+//			for (String poiName : facetsParam.getReplies()) {
+//				Long poiId = analyticsService.getPoiId(poiName);
+//				if (Objects.nonNull(poiId) && poiId != 0L) {
+//					repliesStr += "replied_to_user_id:" + Long.toString(poiId) + " ";
+//				}
+//			}
+//		}
 
 //		String queryText = query + " " + poiNameQuery + " " + langQuery + " " + locQuery + " " + topicsQuery + " "
 //				+ repliesStr;

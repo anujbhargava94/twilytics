@@ -60,7 +60,7 @@ public class AnalyticsService {
 		setFilterFieldsInQuery(facetsParam.getPoiName(), "user.screen_name");
 		setFilterFieldsInQuery(facetsParam.getLang(), "lang");
 		setFilterFieldsInQuery(facetsParam.getLoc(), "user.location");
-		setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
+		//setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
 		setFilterFieldsInQuery(facetsParam.getHashtags(), "hashtags");
 		setFilterFieldsInQuery(facetsParam.getMentions(), "mentions");
 
