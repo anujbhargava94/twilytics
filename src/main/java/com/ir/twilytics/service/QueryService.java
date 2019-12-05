@@ -126,7 +126,7 @@ public class QueryService {
 //				+ repliesStr;
 		String verifiedStr = "";
 		if (!Objects.isNull(facetsParam.getVerified()) && !facetsParam.getVerified().isEmpty()) {
-			verifiedStr = "verified:on";
+			verifiedStr = "verified:"+facetsParam.getVerified();
 		}
 
 		String dateRangeStr = "";
