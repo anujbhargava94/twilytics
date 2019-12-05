@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 import com.ir.twilytics.model.FacetFields;
 import com.ir.twilytics.model.FacetsParam;
 import com.ir.twilytics.service.AnalyticsService;
-import com.ir.twilytics.service.QueryService;
 
 @Controller
 @RequestMapping(value = "/fetch")
@@ -21,9 +20,6 @@ public class AnalyticsController {
 	@Autowired
 	AnalyticsService analyticsService;
 	
-	@Autowired
-	QueryService queryService;
-
 	@RequestMapping(value = "/fields", method = RequestMethod.POST)
 	public @ResponseBody String getFacetedFields(@RequestBody FacetsParam facetsParam, @RequestParam("name") String query) {
 		FacetFields tweets = new FacetFields();
