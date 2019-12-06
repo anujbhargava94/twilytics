@@ -48,7 +48,7 @@ public class AnalyticsService {
 
 		url += queryBuilder.addQueryText(query).addFacetField("user.screen_name").addFacetField("lang").addFacetField("hashtags")
 				.addFacetField("mentions").addFacetField("user.location").addFacet("on").addFl("user.screen_name").addFl("lang")
-				.addRows(0).getQuery().toString();
+				.addRows(0).addFacetLimit(5).getQuery().toString();
 		System.out.println("urls is : " + url);
 
 		return getFacetedResponse(url);
