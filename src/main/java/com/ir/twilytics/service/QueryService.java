@@ -54,11 +54,8 @@ public class QueryService {
 	private AnalyticsService analyticsService;
 
 	public List<Doc> findAll(String query) {
-		String queryStr = (Objects.nonNull(query) && !query.isEmpty())
-				? "full_text:(" + query + ")"
-				: "";
-		String url = resource
-				+ queryBuilder.addQueryText(queryStr).addRows(1000).getQuery().toString();
+		String queryStr = (Objects.nonNull(query) && !query.isEmpty()) ? "full_text:(" + query + ")" : "";
+		String url = resource + queryBuilder.addQueryText(queryStr).addRows(100).getQuery().toString();
 		System.out.println("urls is : " + url);
 
 		return getQueryResponse(url);
@@ -94,34 +91,42 @@ public class QueryService {
 		}
 	}
 
-	public List<Doc> getFacetedResults(FacetsParam facetsParam) {
+	public List<Doc> getFacetedResults(FacetsParam facetsParam, String searchQuery) {
 		// TODO Auto-generated method stub
-		String query = (!Objects.isNull(facetsParam.getQuery()) && !facetsParam.getQuery().isEmpty())
-				? "full_text:(" + facetsParam.getQuery() + ")"
-				: "";
+		String query = "";
+		if (Objects.nonNull(searchQuery) && !searchQuery.isEmpty()) {
+			query = "full_text:(" + searchQuery + ")";
+		} else {
+			query = (!Objects.isNull(facetsParam.getQuery()) && !facetsParam.getQuery().isEmpty())
+					? "full_text:(" + facetsParam.getQuery() + ")"
+					: "";
+		}
+//		String query = (!Objects.isNull(facetsParam.getQuery()) && !facetsParam.getQuery().isEmpty())
+//				? "full_text:(" + facetsParam.getQuery() + ")"
+//				: "";
 		setFilterFieldsInQuery(facetsParam.getPoiName(), "user.screen_name");
 		setFilterFieldsInQuery(facetsParam.getLang(), "lang");
 		setFilterFieldsInQuery(facetsParam.getLoc(), "user.location");
-		setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
+		//setFilterFieldsInQuery(facetsParam.getTopics(), "full_text");
 		setFilterFieldsInQuery(facetsParam.getHashtags(), "hashtags");
 		setFilterFieldsInQuery(facetsParam.getMentions(), "mentions");
 
 		String repliesStr = "";
-		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
-
-			for (String poiName : facetsParam.getReplies()) {
-				Long poiId = analyticsService.getPoiId(poiName);
-				if (Objects.nonNull(poiId) && poiId != 0L) {
-					repliesStr += "replied_to_user_id:" + Long.toString(poiId) + " ";
-				}
-			}
-		}
+//		if (Objects.nonNull(facetsParam.getReplies()) && !facetsParam.getReplies().isEmpty()) {
+//
+//			for (String poiName : facetsParam.getReplies()) {
+//				Long poiId = analyticsService.getPoiId(poiName);
+//				if (Objects.nonNull(poiId) && poiId != 0L) {
+//					repliesStr += "replied_to_user_id:" + Long.toString(poiId) + " ";
+//				}
+//			}
+//		}
 
 //		String queryText = query + " " + poiNameQuery + " " + langQuery + " " + locQuery + " " + topicsQuery + " "
 //				+ repliesStr;
 		String verifiedStr = "";
 		if (!Objects.isNull(facetsParam.getVerified()) && !facetsParam.getVerified().isEmpty()) {
-			verifiedStr = "verified:on";
+			verifiedStr = "verified:"+facetsParam.getVerified();
 		}
 
 		String dateRangeStr = "";
@@ -133,7 +138,7 @@ public class QueryService {
 			dateRangeStr = "tweet_date:[" + dateFrom + " TO " + dateTo + "}";
 		}
 
-		String url = resource + queryBuilder.addQueryText(query).addRows(100).addFilter(verifiedStr)
+		String url = resource + queryBuilder.addQueryText(query).addRows(1000).addFilter(verifiedStr)
 				.addFilter(repliesStr).addFilter(dateRangeStr).getQuery().toString();
 		System.out.println("urls is : " + url);
 		return getQueryResponse(url);

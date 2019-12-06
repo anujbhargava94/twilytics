@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "poi_name", "lang", "hashtags", "mentions", "user.location", "poi_id","user.screen_name","user,id" })
+@JsonPropertyOrder({ "poi_name", "lang", "hashtags", "mentions", "user.location", "poi_id", "user.screen_name",
+		"user,id" })
 public class FacetFields {
 
 	@JsonProperty("poi_name")
@@ -32,7 +33,6 @@ public class FacetFields {
 	private List<String> userScreenName = null;
 	@JsonProperty("user.id")
 	private List<Long> userId = null;
-	
 
 	@JsonProperty("user.screen_name")
 	public List<String> getUserScreenName() {
@@ -58,7 +58,7 @@ public class FacetFields {
 
 	@JsonProperty("poi_id")
 	public List<Long> getPoiId() {
-		
+
 		return poiId;
 	}
 
@@ -73,7 +73,7 @@ public class FacetFields {
 
 	@JsonProperty("poi_name")
 	public List<String> getPoiName() {
-		
+
 		return poiName;
 	}
 
@@ -96,7 +96,7 @@ public class FacetFields {
 
 	@JsonProperty("hashtags")
 	public List<String> getHashtags() {
-		
+
 		return hashtags;
 	}
 
@@ -108,7 +108,7 @@ public class FacetFields {
 
 	@JsonProperty("mentions")
 	public List<String> getMentions() {
-		
+
 		return mentions;
 	}
 
@@ -120,7 +120,7 @@ public class FacetFields {
 
 	@JsonProperty("user.location")
 	public List<String> getUserLocation() {
-		
+
 		return userLocation;
 	}
 
@@ -139,14 +139,33 @@ public class FacetFields {
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
 	}
-	
+
 	private <T> void removeCount(List<T> field) {
 		if (Objects.nonNull(field)) {
 			for (int i = 1; i < field.size(); i++) {
-				field.remove(i);
+				String val = (String) field.get(i);
+				if (isNumeric(val)) {
+					field.remove(i);
+					if (val.equals("0")) {
+						field.remove(i - 1);
+						i=i-1;
+					}
+				}
 			}
 		}
-		
+
+	}
+
+	public static boolean isNumeric(String strNum) {
+		if (strNum == null) {
+			return false;
+		}
+		try {
+			int d = Integer.parseInt(strNum);
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+		return true;
 	}
 
 }
